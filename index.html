@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>I love you, Nonori :P 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffe6ec, #ffd6e0, #fff0f5);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      position: relative;
+    }
+
+    a.message {
+      font-size: 3.5rem;
+      color: #ff2e63;
+      text-shadow: 0 0 5px white, 0 0 15px #ff91a4;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 4px solid #ff91a4;
+      
+      opacity: 0;
+      width: 0;
+      display: inline-block; /* สำคัญสำหรับ animation width */
+      position: relative;
+      z-index: 10;
+      text-decoration: none; /* ลบเส้นขีดลิงก์ */
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    a.message:hover {
+      color: #ff6b81;
+      text-shadow: 0 0 15px #ff6b81, 0 0 25px #ff2e63;
+    }
+
+    /* เล่น animation เมื่อเพิ่มคลาส animate */
+    a.message.animate {
+      animation: entrance 1.5s ease-out forwards,
+                 typing 3s steps(18, end) 1.5s forwards,
+                 blink 0.75s step-end infinite 4.5s;
+      opacity: 1;
+    }
+
+    @keyframes entrance {
+      0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    /* ใช้หน่วย ch สำหรับ width ของข้อความ 18 ตัวอักษร */
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 18ch }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    .glow {
+      animation: glowEffect 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowEffect {
+      from {
+        text-shadow: 0 0 5px #fff, 0 0 10px #ff5e94, 0 0 15px #ff5e94;
+      }
+      to {
+        text-shadow: 0 0 10px #fff, 0 0 20px #ff2e63, 0 0 25px #ff2e63;
+      }
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, #ff2e63, #ff6b81);
+      transform: rotate(45deg);
+      animation: float 6s linear infinite;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, #ff2e63, #ff6b81);
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-800px) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    .glitter {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      box-shadow: 0 0 5px white, 0 0 10px #ff91a4;
+      animation: twinkle 1.5s infinite ease-in-out;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    @keyframes twinkle {
+      0%, 100% {
+        opacity: 0.2;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.5);
+      }
+    }
+
+    /* เพิ่ม effect แสงวาบแบบวงกลมล้อมรอบข้อความ */
+    a.message::before {
+      content: "";
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 160%; height: 160%;
+      background: radial-gradient(circle, rgba(255,46,99,0.3), transparent 70%);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      animation: pulseGlow 3s ease-in-out infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.7;
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 1;
+      }
+    }
+
+    /* ฟองอากาศลอยขึ้น */
+    .bubble {
+      position: absolute;
+      bottom: 0;
+      width: 12px;
+      height: 12px;
+      background: rgba(255, 46, 99, 0.5);
+      border-radius: 50%;
+      animation: bubbleUp linear forwards;
+      filter: drop-shadow(0 0 3px #ff2e63);
+      pointer-events: none;
+    }
+
+    @keyframes bubbleUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-600px) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    /* ประกายดาวขนาดใหญ่ */
+    .big-glitter {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: white;
+      box-shadow: 0 0 10px white, 0 0 20px #ff91a4;
+      animation: twinkleBig 2s infinite ease-in-out;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    @keyframes twinkleBig {
+      0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(2);
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <a href="https://yourwebsite.com" target="_blank" rel="noopener noreferrer" class="message glow">I love you, Nonori :P 💖</a>
+
+  <script>
+    // เพิ่มคลาส animate ให้ .message หลังโหลดเสร็จ เพื่อเริ่มอนิเมชัน
+    window.onload = () => {
+      const message = document.querySelector('.message');
+      message.classList.add('animate');
+    };
+
+    // สร้างหัวใจ
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = `${Math.random() * 100}%`;
+      heart.style.animationDuration = `${4 + Math.random() * 4}s`;
+      heart.style.width = `${10 + Math.random() * 20}px`;
+      heart.style.height = heart.style.width;
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }
+
+    // สร้างกลิตเตอร์เล็ก
+    function createGlitter() {
+      const glitter = document.createElement("div");
+      glitter.className = "glitter";
+      glitter.style.left = `${Math.random() * 100}%`;
+      glitter.style.top = `${Math.random() * 100}%`;
+      glitter.style.animationDuration = `${1 + Math.random() * 1.5}s`;
+      document.body.appendChild(glitter);
+      setTimeout(() => glitter.remove(), 2000);
+    }
+
+    // สร้างฟองอากาศลอยขึ้น
+    function createBubble() {
+      const bubble = document.createElement("div");
+      bubble.className = "bubble";
+      bubble.style.left = `${Math.random() * 100}%`;
+      bubble.style.animationDuration = `${4 + Math.random() * 3}s`;
+      document.body.appendChild(bubble);
+      setTimeout(() => bubble.remove(), 7000);
+    }
+
+    // สร้างประกายดาวใหญ่
+    function createBigGlitter() {
+      const glitter = document.createElement("div");
+      glitter.className = "big-glitter";
+      glitter.style.left = `${Math.random() * 100}%`;
+      glitter.style.top = `${Math.random() * 100}%`;
+      glitter.style.animationDuration = `${1.5 + Math.random() * 1.5}s`;
+      document.body.appendChild(glitter);
+      setTimeout(() => glitter.remove(), 4000);
+    }
+
+    // เพิ่มจำนวนหัวใจและกลิตเตอร์ให้เยอะขึ้น
+    setInterval(createHeart, 150);
+    setInterval(createGlitter, 80);
+    setInterval(createBubble, 400);
+    setInterval(createBigGlitter, 600);
+  </script>
+
+</body>
+</html>
