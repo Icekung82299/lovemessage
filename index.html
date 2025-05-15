@@ -8,7 +8,8 @@
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(135deg, #ffe6ec, #ffd6e0, #fff0f5);
+      background: url('https://pakmud.com/wp-content/uploads/2023/03/%E0%B8%A1%E0%B8%B5%E0%B8%A1%E0%B9%81%E0%B8%A1%E0%B8%A7-2-356x358.jpg') no-repeat center center;
+      background-size: cover;
       overflow: hidden;
       display: flex;
       justify-content: center;
@@ -17,7 +18,7 @@
       position: relative;
     }
 
-    a.message {
+    .message {
       font-size: 3.5rem;
       color: #ff2e63;
       text-shadow: 0 0 5px white, 0 0 15px #ff91a4;
@@ -25,24 +26,16 @@
       white-space: nowrap;
       overflow: hidden;
       border-right: 4px solid #ff91a4;
-      
       opacity: 0;
       width: 0;
-      display: inline-block; /* สำคัญสำหรับ animation width */
+      display: inline-block;
       position: relative;
       z-index: 10;
-      text-decoration: none; /* ลบเส้นขีดลิงก์ */
-      cursor: pointer;
-      transition: color 0.3s ease;
+      user-select: none;
+      cursor: default;
     }
 
-    a.message:hover {
-      color: #ff6b81;
-      text-shadow: 0 0 15px #ff6b81, 0 0 25px #ff2e63;
-    }
-
-    /* เล่น animation เมื่อเพิ่มคลาส animate */
-    a.message.animate {
+    .message.animate {
       animation: entrance 1.5s ease-out forwards,
                  typing 3s steps(18, end) 1.5s forwards,
                  blink 0.75s step-end infinite 4.5s;
@@ -60,7 +53,6 @@
       }
     }
 
-    /* ใช้หน่วย ch สำหรับ width ของข้อความ 18 ตัวอักษร */
     @keyframes typing {
       from { width: 0 }
       to { width: 18ch }
@@ -70,17 +62,32 @@
       50% { border-color: transparent }
     }
 
-    .glow {
-      animation: glowEffect 2s ease-in-out infinite alternate;
+    .message::before {
+      content: "";
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 160%; height: 160%;
+      background: radial-gradient(circle, rgba(255,46,99,0.3), transparent 70%);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      animation: pulseGlow 3s ease-in-out infinite;
+      pointer-events: none;
+      z-index: -1;
     }
 
-    @keyframes glowEffect {
-      from {
-        text-shadow: 0 0 5px #fff, 0 0 10px #ff5e94, 0 0 15px #ff5e94;
+    @keyframes pulseGlow {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.7;
       }
-      to {
-        text-shadow: 0 0 10px #fff, 0 0 20px #ff2e63, 0 0 25px #ff2e63;
+      50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 1;
       }
+    }
+
+    .heart, .glitter, .bubble, .big-glitter {
+      pointer-events: none;
     }
 
     .heart {
@@ -91,11 +98,9 @@
       transform: rotate(45deg);
       animation: float 6s linear infinite;
       opacity: 0.7;
-      pointer-events: none;
     }
 
-    .heart::before,
-    .heart::after {
+    .heart::before, .heart::after {
       content: "";
       position: absolute;
       width: 20px;
@@ -133,7 +138,6 @@
       box-shadow: 0 0 5px white, 0 0 10px #ff91a4;
       animation: twinkle 1.5s infinite ease-in-out;
       border-radius: 50%;
-      pointer-events: none;
     }
 
     @keyframes twinkle {
@@ -147,32 +151,6 @@
       }
     }
 
-    /* เพิ่ม effect แสงวาบแบบวงกลมล้อมรอบข้อความ */
-    a.message::before {
-      content: "";
-      position: absolute;
-      top: 50%; left: 50%;
-      width: 160%; height: 160%;
-      background: radial-gradient(circle, rgba(255,46,99,0.3), transparent 70%);
-      border-radius: 50%;
-      transform: translate(-50%, -50%) scale(1);
-      animation: pulseGlow 3s ease-in-out infinite;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    @keyframes pulseGlow {
-      0%, 100% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.7;
-      }
-      50% {
-        transform: translate(-50%, -50%) scale(1.2);
-        opacity: 1;
-      }
-    }
-
-    /* ฟองอากาศลอยขึ้น */
     .bubble {
       position: absolute;
       bottom: 0;
@@ -182,7 +160,6 @@
       border-radius: 50%;
       animation: bubbleUp linear forwards;
       filter: drop-shadow(0 0 3px #ff2e63);
-      pointer-events: none;
     }
 
     @keyframes bubbleUp {
@@ -196,7 +173,6 @@
       }
     }
 
-    /* ประกายดาวขนาดใหญ่ */
     .big-glitter {
       position: absolute;
       width: 4px;
@@ -205,7 +181,6 @@
       box-shadow: 0 0 10px white, 0 0 20px #ff91a4;
       animation: twinkleBig 2s infinite ease-in-out;
       border-radius: 50%;
-      pointer-events: none;
     }
 
     @keyframes twinkleBig {
@@ -218,21 +193,18 @@
         transform: scale(2);
       }
     }
-
   </style>
 </head>
 <body>
 
-  <a href="https://yourwebsite.com" target="_blank" rel="noopener noreferrer" class="message glow">I love you, Nonori :P 💖</a>
+  <div class="message">I love you, Nonori :P 💖</div>
 
   <script>
-    // เพิ่มคลาส animate ให้ .message หลังโหลดเสร็จ เพื่อเริ่มอนิเมชัน
     window.onload = () => {
       const message = document.querySelector('.message');
       message.classList.add('animate');
     };
 
-    // สร้างหัวใจ
     function createHeart() {
       const heart = document.createElement("div");
       heart.className = "heart";
@@ -244,7 +216,6 @@
       setTimeout(() => heart.remove(), 8000);
     }
 
-    // สร้างกลิตเตอร์เล็ก
     function createGlitter() {
       const glitter = document.createElement("div");
       glitter.className = "glitter";
@@ -255,7 +226,6 @@
       setTimeout(() => glitter.remove(), 2000);
     }
 
-    // สร้างฟองอากาศลอยขึ้น
     function createBubble() {
       const bubble = document.createElement("div");
       bubble.className = "bubble";
@@ -265,7 +235,6 @@
       setTimeout(() => bubble.remove(), 7000);
     }
 
-    // สร้างประกายดาวใหญ่
     function createBigGlitter() {
       const glitter = document.createElement("div");
       glitter.className = "big-glitter";
@@ -276,7 +245,6 @@
       setTimeout(() => glitter.remove(), 4000);
     }
 
-    // เพิ่มจำนวนหัวใจและกลิตเตอร์ให้เยอะขึ้น
     setInterval(createHeart, 150);
     setInterval(createGlitter, 80);
     setInterval(createBubble, 400);
